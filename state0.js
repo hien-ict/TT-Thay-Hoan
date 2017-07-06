@@ -1,14 +1,45 @@
-var demo = {};
+var demo = {}, centerX=1920/2, centerY=1080/2, face, speed=8;
 demo.state0 = function () {};
 demo.state0.prototype = {
-    preload: function () {},
+    preload: function () {
+        game.load.image('face','Images/Picture.png');
+        game.load.image('background','Images/background2.png');
+    },
     create: function () {
+        game.physics.startSystem(Phaser.Physics.ARCADE);
         game.stage.backgroundColor = '#4d4dff';
         console.log('state0');
         addChangeStateEventListeners();
+        game.world.setBounds(0, 0, 4269,2133);
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+
+        var bg=game.add.sprite(0 ,0 ,'background');
+        face=game.add.sprite(centerX, centerY, 'face');
+        face.anchor.setTo(0.5,0.5);
+        face.scale.setTo(0.6,0.6);
+
+        game.physics.enable(face);
+        face.body.collideWorldBounds = true;
+
+        game.camera.follow(face);
+        game.camera.deadzone = new Phaser.Rectangle(300,100,1420,880);
     },
-    update: function () {}
+    update: function () {
+        if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+            face.scale.setTo(0.6,0.6);
+            face.x+=speed;
+        }
+        else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
+            face.scale.setTo(-0.6,0.6);
+            face.x-=speed;
+        }
+        if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
+            face.y-=speed;
+        }
+        else if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
+            face.y+=speed;
+        }
+    }
 };
 
 function changeState(i, stateNum) {
