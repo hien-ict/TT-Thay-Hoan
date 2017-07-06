@@ -1,8 +1,8 @@
-var demo = {}, centerX=1920/2, centerY=1080/2, face, speed=8;
+var demo = {}, centerX=1920/2, centerY=1080/2, face, speed=6;
 demo.state0 = function () {};
 demo.state0.prototype = {
     preload: function () {
-        game.load.image('face','Images/Picture.png');
+        game.load.spritesheet('face','Images/human.png',250,380);
         game.load.image('background','Images/background2.png');
     },
     create: function () {
@@ -20,6 +20,7 @@ demo.state0.prototype = {
 
         game.physics.enable(face);
         face.body.collideWorldBounds = true;
+        face.animations.add('walk',[0,1,2,3,4]);
 
         game.camera.follow(face);
         game.camera.deadzone = new Phaser.Rectangle(300,100,1420,880);
@@ -28,10 +29,16 @@ demo.state0.prototype = {
         if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
             face.scale.setTo(0.6,0.6);
             face.x+=speed;
+            face.animations.play('walk',14,true);
         }
         else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
             face.scale.setTo(-0.6,0.6);
             face.x-=speed;
+            face.animations.play('walk',14,true);
+        }
+        else{
+            face.animations.stop('walk');
+            face.frame=0;
         }
         if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
             face.y-=speed;
