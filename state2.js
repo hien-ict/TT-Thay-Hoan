@@ -5,11 +5,13 @@ demo.state2.prototype = {
         game.load.image('base', 'Images/base.png');
         game.load.image('barrel', 'Images/barrel.png');
         game.load.image('bullet', 'Images/bullet.png');
+        game.load.spritesheet('face','Images/human.png',250,380);
     },
     create: function () {
+        //game.physics.startSystem(Phaser.Physics.ARCADE);
         game.stage.backgroundColor = '#ff66ff';
         addChangeStateEventListeners();
-
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         //add canon
         var base = game.add.sprite(centerX, centerY, 'base');
         base.anchor.setTo(0.5);

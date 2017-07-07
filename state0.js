@@ -11,7 +11,7 @@ demo.state0.prototype = {
 
         addChangeStateEventListeners();
         game.world.setBounds(0, 0, 4269,2133);
-        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL; // vừa màn hình
 
         var bg=game.add.sprite(0 ,0 ,'background');
         face=game.add.sprite(centerX, centerY, 'face');
@@ -59,6 +59,9 @@ function addKeyCallback(key, fn, args) {
 }
 
 function addChangeStateEventListeners() {
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.pageAlignHorizontally = true;
+    game.scale.pageAlignVertically = true;
     addKeyCallback(Phaser.Keyboard.ZERO, changeState, 0);
     addKeyCallback(Phaser.Keyboard.ONE, changeState, 1);
     addKeyCallback(Phaser.Keyboard.TWO, changeState, 2);
