@@ -52,7 +52,7 @@ demo.state2.prototype = {
         }
 
         game.physics.arcade.overlap(bullets, enemy, this.hitEnemy);
-        game.physics.arcade.overlap(bullets, enemyGroup, this.hitGroup);
+        game.physics.arcade.overlap(enemyGroup, bullets, this.hitGroup);
     },
     fire: function () {
         if (game.time.now > nextFire) {
@@ -71,8 +71,8 @@ demo.state2.prototype = {
         bullet.kill();
         enemy.kill();
     },
-    hitGroup: function(b ,a ){
-        b.kill();
+    hitGroup: function(a ){
+        bullet.kill();
         a.kill();
     }
 };
